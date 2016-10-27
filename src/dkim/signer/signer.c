@@ -9,10 +9,6 @@
   #include "rubyio.h"
 #endif
 
-#ifndef STR2CSTR
-#define STR2CSTR StringValueCStr
-#endif
-
 static VALUE mDKIM, cDKIMSigner, cDKIMSignature, cTime;
 
 // feed data to the dkim context
@@ -98,9 +94,9 @@ VALUE signer_new(VALUE class, VALUE domain, VALUE selector, VALUE key)
 {
     // create the DKIM context
     pdkim_ctx *ctx = pdkim_init_sign(PDKIM_INPUT_NORMAL,    /* Input type */
-                                       STR2CSTR(domain),    /* Domain   */
-                                       STR2CSTR(selector),  /* Selector */
-                                       STR2CSTR(key)        /* Private RSA key */
+                                       StringValueCStr(domain),    /* Domain   */
+                                       StringValueCStr(selector),  /* Selector */
+                                       StringValueCStr(key)        /* Private RSA key */
                        );
     
     // wrap it into our class

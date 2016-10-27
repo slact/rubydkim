@@ -9,10 +9,6 @@
   #include "rubyio.h"
 #endif
 
-#ifndef STR2CSTR
-#define STR2CSTR StringValueCStr
-#endif
-
 static VALUE mDKIM, cDKIMVerifier, cDKIMResolver, cDKIMSignature, cTime;
 
 // feed data to the dkim context
@@ -105,7 +101,7 @@ int query_dns_txt(char *name, char *answer) {
     VALUE record = rb_funcall(cDKIMResolver, rb_intern("lookup_record"), 1, rb_str_new2(name));
 
     // copy the results to the context
-    strcpy(answer, STR2CSTR(record));
+    strcpy(answer, StringValueCStr(record));
     return PDKIM_OK;
 }
 

@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{rubydkim}
-  s.version = "0.3.1"
+  s.version = "0.3.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Ian Ragsdale"]
@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.executables = ["dkim_sign.rb", "dkim_verify.rb"]
   s.extensions = ["src/dkim/signer/extconf.rb", "src/dkim/verifier/extconf.rb"]
   s.files = ["bin", "bin/dkim_sign.rb", "bin/dkim_verify.rb", "lib", "lib/dkim.rb", "LICENSE", "Rakefile", "README", "rubydkim.gemspec", "sample_key", "sample_key.pub", "src", "src/dkim", "src/dkim/signer", "src/dkim/signer/extconf.rb", "src/dkim/signer/signer.c", "src/dkim/verifier", "src/dkim/verifier/extconf.rb", "src/dkim/verifier/verifier.c", "VERSION"]
-  s.homepage = %q{http://github.com/iragsdale/rubydkim}
+  s.homepage = %q{http://github.com/slact/rubydkim}
   s.require_paths = ["lib", "lib"]
   s.rubygems_version = %q{1.3.1}
   s.summary = %q{A gem for creating & verifying DKIM signatures}
