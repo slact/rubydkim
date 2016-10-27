@@ -60,13 +60,10 @@ module DKIM
     end
     
     def self.lookup_record(domain)
-      @cache||={}
-      return @cache[domain] if @cache[domain]
       resolver = Dnsruby::DNS.new
       resources = resolver.getresources(domain, Dnsruby::Types::TXT)
       if resources
-        @cache[domain]=resources.collect {|r| r.data}.join
-        return @cache[domain]
+        return resources.collect {|r| r.data}.join
       else
         return ""
       end
