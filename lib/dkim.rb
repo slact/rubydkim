@@ -63,11 +63,10 @@ module DKIM
       @cache||={}
       return @cache[domain] if @cache[domain]
       
+      txt = ""
       Resolv::DNS.open do |dns|
         records = dns.getresources(domain, Resolv::DNS::Resource::IN::TXT)
-        if records.empty? 
-          txt = ""
-        else
+        unless records.empty? 
           txt = records.map(&:data).join(" ")
           @cache[domain] = txt
         end
