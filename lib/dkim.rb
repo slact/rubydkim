@@ -4,7 +4,7 @@ require 'signer'
 require 'verifier'
 # we do DNS lookups in dnsruby
 require 'rubygems'
-require 'dnsruby'
+require 'resolv'
 
 module DKIM
   class Signature
@@ -60,13 +60,12 @@ module DKIM
     end
     
     def self.lookup_record(domain)
-      resolver = Dnsruby::DNS.new
-      resources = resolver.getresources(domain, Dnsruby::Types::TXT)
-      if resources
-        return resources.collect {|r| r.data}.join
-      else
-        return ""
+      txt = Resolv::DNS.open do |dns|
+        records = dns.getresources(domain, Resolv::DNS::Resource::IN::TXT)
+        records.empty? ? nil : records.map(&:data).join(" ")
       end
+      
+      return txt
     end
   end
 end
