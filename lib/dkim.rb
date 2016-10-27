@@ -30,11 +30,11 @@ module DKIM
     
     def status
       if verify_status == PDKIM_VERIFY_PASS
-        return :pass
-      if verify_status == PDKIM_VERIFY_NONE
-        return :none
+        :pass
+      elsif verify_status == PDKIM_VERIFY_NONE
+        :none
       else
-        return case verify_ext_status
+        case verify_ext_status
         when PDKIM_VERIFY_FAIL_BODY
           :fail_body
         when PDKIM_VERIFY_FAIL_MESSAGE
