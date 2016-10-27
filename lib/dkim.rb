@@ -56,11 +56,11 @@ module DKIM
   class Resolver
     # finds the text records for a given domain and joins them into a single data field
     def self.clear_cache!
-      @cache=[]
+      @cache={}
     end
     
     def self.lookup_record(domain)
-      @cache||=[]
+      @cache||={}
       return @cache[domain] if @cache[domain]
       resolver = Dnsruby::DNS.new
       resources = resolver.getresources(domain, Dnsruby::Types::TXT)
