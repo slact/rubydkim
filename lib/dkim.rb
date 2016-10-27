@@ -28,6 +28,29 @@ module DKIM
       return verify_status == PDKIM_VERIFY_PASS
     end
     
+    def status
+      if verify_status == PDKIM_VERIFY_PASS
+        return :pass
+      if verify_status == PDKIM_VERIFY_NONE
+        return :none
+      else
+        case verify_ext_status
+        when PDKIM_VERIFY_FAIL_BODY:
+          return :fail_body
+        when PDKIM_VERIFY_FAIL_MESSAGE:
+          return :fail_message
+        when PDKIM_VERIFY_INVALID_PUBKEY_UNAVAILABLE:
+          return :invalid_pubkey_unavailable 
+        when PDKIM_VERIFY_INVALID_BUFFER_SIZE:
+          return :invalid_buffer_size
+        when PDKIM_VERIFY_INVALID_PUBKEY_PARSING:
+          return :invalid_pubkey
+        else
+          return :unknown
+        end
+      end
+    end
+    
   end
   
   class Resolver
