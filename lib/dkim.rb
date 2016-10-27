@@ -62,7 +62,7 @@ module DKIM
     def self.lookup_record(domain)
       txt = Resolv::DNS.open do |dns|
         records = dns.getresources(domain, Resolv::DNS::Resource::IN::TXT)
-        records.empty? ? nil : records.map(&:data).join(" ")
+        records.empty? ? "" : records.map(&:data).join(" ")
       end
       
       return txt
